@@ -226,7 +226,7 @@ class CreateContact extends React.Component {
     render() {
         const {classes} = this.props;
         return <div>
-            <Fab variant="extended" style={{position: 'fixed', bottom: '20px', right: '20px'}}
+            <Fab variant="extended"  color="primary" style={{position: 'fixed', bottom: '20px', right: '20px'}}
                  onClickCapture={() => this.handleClickOpen()}>
                 <AddIcon/>
                 Contato

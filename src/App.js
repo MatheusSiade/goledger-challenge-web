@@ -188,7 +188,7 @@ function App() {
                         </Toolbar>
                     </AppBar>
                 </div>
-            </ThemeProvider>
+
             <nav className={classes.drawer} aria-label="mailbox folders">
                 <Hidden smUp implementation="css">
                     <Drawer variant="temporary" anchor={theme.direction === 'rtl' ? 'right' : 'left'}
@@ -207,7 +207,9 @@ function App() {
                 <ContactListBuilder searchText={searchText} displayBar={selectedIndex}/>
                 <CreateContact/>
             </div>
+            </ThemeProvider>
         </div>
+
 
 
     );

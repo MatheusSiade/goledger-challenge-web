@@ -127,7 +127,7 @@ function ContactList(props) {
                         {(contact.address === undefined) && <ListItemIcon>
                             <PersonIcon/>
                         </ListItemIcon>}
-                        <ListItemText primary={contact.name} secondary={contact.phone || contact.address}/>
+                        <ListItemText primary={contact.name} secondary={contact.phone || contact.number}/>
                     </ListItem>
                 ))}
             </List>

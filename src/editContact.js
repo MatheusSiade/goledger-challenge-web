@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import InputMask from 'react-input-mask';
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import SaveIcon from '@material-ui/icons/Save';
 const styles = theme => ({
     input:{
         margin: '0 0 10px 0 '
@@ -191,6 +191,7 @@ class EditContact extends React.Component {
     render() {
         const {classes} = this.props;
         return <div>
+
             <form autoComplete="off" id="myForm">
 
                 {!this.state.company &&
@@ -214,7 +215,7 @@ class EditContact extends React.Component {
 
                     <TextField value={this.state.companyName} className={classes.input} onChange={this.handleCompanyNameChange}
                                id="outlined-basic" label="Empresa" variant="outlined" fullWidth/>
-                    <TextField id="outlined-basic" value={this.state.email} onChange={this.handleEmailChange}
+                    <TextField id="outlined-basic" value={this.state.email} className={classes.input} onChange={this.handleEmailChange}
                                label="Email" variant="outlined" fullWidth/>
 
                 </div>}
@@ -244,7 +245,7 @@ class EditContact extends React.Component {
                                            variant="outlined" fullWidth/>}
                     </InputMask>
                 </div>}
-                <div style={{width:'100%', position: 'relative'}}><Button className={classes.rightButton} onClickCapture={() => this.submitForm()}>Editar</Button></div>
+                <div style={{width:'100%',height: 50, position: 'relative'}}><Button variant="outlined" color="primary" className={classes.rightButton} onClickCapture={() => this.submitForm()} startIcon={<SaveIcon/>}>Salvar Alterações</Button></div>
 
             </form>
         </div>
