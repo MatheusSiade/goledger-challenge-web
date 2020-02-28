@@ -149,9 +149,12 @@ class CreateContact extends React.Component {
             }
         } else {
             let address = this.state.address;
+            let companyPhone = this.state.companyPhone;
             if (address.length === 0) {
-                this.setState({phoneError: true, phoneErrorText: "O preenchimento do endereço é obrigatório"});
-            }else if ((!this.state.nameError) && (!this.state.addressError)) {
+                this.setState({addressError: true, addressErrorText: "O preenchimento do endereço é obrigatório"});
+            }else if (companyPhone.length === 0) {
+                this.setState({companyPhoneError: true, companyPhoneErrorText: "O preenchimento do telefone é obrigatório"});
+            }else if ((!this.state.nameError) &&(!this.state.addressError) && (!this.state.companyPhoneError)) {
                 this.createContact().then(answer => {
                     window.location.reload();
                 }).catch(console.log);
@@ -170,7 +173,8 @@ class CreateContact extends React.Component {
                         name: this.state.name,
                         phone: this.state.phone,
                         company: this.state.companyName,
-                        email: this.state.email
+                        email: this.state.email,
+                        age: parseInt(this.state.age)
                     });
                 } else {
                     json = JSON.stringify({
@@ -179,7 +183,7 @@ class CreateContact extends React.Component {
                         phone: this.state.phone,
                         company: this.state.companyName,
                         email: this.state.email,
-                        age: parseInt(this.state.age)
+
                     });
                 }
             } else {
@@ -190,7 +194,8 @@ class CreateContact extends React.Component {
                         name: this.state.name,
                         address: this.state.address,
                         number: this.state.companyPhone,
-                        site: this.state.website
+                        site: this.state.website,
+                        nemployees: parseInt(this.state.peopleCount)
                     });
                 } else {
                     json = JSON.stringify({
@@ -199,7 +204,7 @@ class CreateContact extends React.Component {
                         address: this.state.address,
                         number: this.state.companyPhone,
                         site: this.state.website,
-                        nemployees: parseInt(this.state.peopleCount)
+
                     });
                 }
             }
@@ -288,7 +293,7 @@ class CreateContact extends React.Component {
                             <TextField   className={classes.input} id="outlined-basic" value={this.state.website} onChange={this.handleSiteChange}
                                        label="Site" variant="outlined" fullWidth/>
 
-                            <InputMask mask="99" value={this.state.peopleCount} onChange={this.handlePeopleCountChange}
+                            <InputMask mask="999999" value={this.state.peopleCount} onChange={this.handlePeopleCountChange}
                                        maskChar="">
                                 {() => <TextField  className={classes.input}  id="outlined-basic" label="Número de Funcionários"
                                                   variant="outlined" fullWidth/>}

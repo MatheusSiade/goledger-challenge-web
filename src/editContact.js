@@ -69,13 +69,13 @@ class EditContact extends React.Component {
     };
     handleCompanyPhoneChange = (e) => {
         let companyPhone = e.target.value;
-        if (companyPhone.length !== 14 && companyPhone.length !== 13 && companyPhone.length !== 0) {
+        if (companyPhone.length !== 14 && companyPhone.length !== 13) {
             this.setState({
                 companyPhone: companyPhone,
                 companyPhoneError: true,
                 companyPhoneErrorText: "O número deve ser escrito no formato (XX)XXXXX-XXXX"
             });
-        } else if (companyPhone.length === 14 || companyPhone.length === 13 || companyPhone.length === 0) {
+        } else if (companyPhone.length === 14 || companyPhone.length === 13) {
             if (companyPhone.length === 13) {
                 this.setState({mask: "(99)9999-99999"})
             } else if (companyPhone.length === 14) {
@@ -122,7 +122,11 @@ class EditContact extends React.Component {
             if (address.length === 0) {
                 this.setState({phoneError: true, phoneErrorText: "O preenchimento do endereço é obrigatório"});
             }
-            if ((!this.state.addressError)) {
+            let companyPhone = this.state.companyPhone;
+            if (companyPhone.length === 0) {
+                this.setState({companyPhoneError: true, companyPhoneErrorText: "O preenchimento do telefone é obrigatório"});
+            }
+            if ((!this.state.addressError) && (!this.state.companyPhoneError)) {
                 this.updateContact().then(answer => {
                     window.location.reload();
                 }).catch(console.log);
@@ -154,12 +158,13 @@ class EditContact extends React.Component {
             }
         } else {
             // noinspection DuplicatedCode
-            if (parseInt(this.state.peopleCount) !== null) {
+
+            if (parseInt(this.state.peopleCount) !== null ) {
                 json = JSON.stringify({
                     "@assetType": "company",
                     name: this.state.name,
                     address: this.state.address,
-                    companyPhone: this.state.companyPhone,
+                    number: this.state.companyPhone,
                     site: this.state.website,
                     nemployees: parseInt(this.state.peopleCount)
                 });
@@ -170,7 +175,6 @@ class EditContact extends React.Component {
                     address: this.state.address,
                     number: this.state.companyPhone,
                     site: this.state.website,
-
                 });
             }
         }
@@ -234,7 +238,7 @@ class EditContact extends React.Component {
                     <TextField   className={classes.input} id="outlined-basic" value={this.state.website} onChange={this.handleSiteChange}
                                  label="Site" variant="outlined" fullWidth/>
 
-                    <InputMask mask="99" value={this.state.peopleCount} onChange={this.handlePeopleCountChange}
+                    <InputMask mask="999999" value={this.state.peopleCount} onChange={this.handlePeopleCountChange}
                                maskChar="">
                         {() => <TextField  className={classes.input}  id="outlined-basic" label="Número de Funcionários"
                                            variant="outlined" fullWidth/>}
